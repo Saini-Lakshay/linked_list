@@ -1,0 +1,94 @@
+listnode* deleteDuplicates(listnode* A)
+{
+    listnode *p1 = A;
+    listnode *curr = A;
+    listnode *n = A;
+    
+    if(p1->next==NULL)
+    {
+        return A;
+    }
+    
+    listnode *node=(listnode *)malloc(sizeof(listnode));
+    node->next=A;
+    A=node;
+    curr=A;
+    p1=A;
+    n=A;
+    
+    while(n)
+    {
+        if(curr->val == n->val)
+        {
+            if(n->next==NULL && curr->val==n->val)
+            {
+                p1->next=n->next;
+                break;
+            }
+            else if(n->next==NULL && curr->val!=n->val)
+            {
+                p1->next=curr;
+                p1=p1->next;
+                p1->next=n;
+                break;
+            }
+            
+            n=n->next;
+        }
+        else if(curr->val != n->val && curr->next != n)
+        {
+            if(n->next==NULL && curr->val==n->val)
+            {
+                p1->next=n->next;
+                break;
+            }
+            else if(n->next==NULL && curr->val!=n->val)
+            {
+                p1->next=curr;
+                p1=p1->next;
+                p1->next=n;
+                break;
+            }
+            curr=n;
+        }
+        else if(curr->val != n->val && curr->next == n)
+        {
+            if(n->next==NULL && curr->val==n->val)
+            {
+                p1->next=n->next;
+                break;
+            }
+            else if(n->next==NULL && curr->val!=n->val)
+            {
+                p1->next=curr;
+                p1=p1->next;
+                p1->next=n;
+                break;
+            }
+            p1->next=curr;
+            p1=curr;
+            curr=n;
+        }
+        else if(n->next == NULL && curr->val == n->val)
+        {
+            if(n->next==NULL && curr->val==n->val)
+            {
+                p1->next=n->next;
+                break;
+            }
+            else if(n->next==NULL && curr->val!=n->val)
+            {
+                p1->next=curr;
+                p1=p1->next;
+                p1->next=n;
+                break;
+            }
+            p1->next=n->next;
+            A=node->next;
+            return A;
+        }
+    }
+    A=node->next;
+    return A;
+    
+}
