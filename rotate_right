@@ -1,0 +1,63 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * @input B : Integer
+ * 
+ * @Output head pointer of list.
+ */
+listnode* rotateRight(listnode* A, int c) {
+    int i=0,l=0,count=0;
+    listnode* h=A;
+    listnode* prev=A;
+    listnode* last=A;
+    listnode* curr=A;
+    
+    while(prev)
+    {
+        l++;
+        if(prev->next==NULL)
+            last=prev;
+        prev=prev->next;
+    }
+    
+    if(l==1 || l==c)
+        return A;
+    
+    if(l<c)
+    {
+        c=c%l;
+        if(c%l==0)
+            return A;
+    }
+    count=l-c;
+    prev=A;
+    
+    while(i<(count-1))
+    {
+        curr=curr->next;
+        i++;
+    }
+    h=curr->next;
+    
+    curr->next=NULL;
+    last->next=prev;
+    
+    return h;
+    
+    
+}
